@@ -3,6 +3,8 @@ const app = express();
 const URL = require("./models/url");
 const post = 3001;
 const urlRoute = require("./routes/url");
+const path = require("path");
+const staticRouter = require("./routes/staticRouter");
 const { connectToMongoDB } = require("./connection");
 
 connectToMongoDB("mongodb://localhost:27017/short-url").then(() =>
@@ -10,9 +12,13 @@ connectToMongoDB("mongodb://localhost:27017/short-url").then(() =>
 );
 app.use(express.json());
 
-app.use("/url", urlRoute);
+app.set("view engine", "ejs");
+app.set("views", path.resolve("./views"));
 
-app.get("/:shortId", async (req, res) => {
+app.use("/url", urlRoute);
+app.use("/", staticRouter);
+
+app.get("/url/:shortId", async (req, res) => {
   const shortId = req.params.shortId;
   const entry = await URL.findOneAndUpdate(
     { shortId },
