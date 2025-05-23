@@ -31,6 +31,7 @@ URL-Shortener/
 ## 🛠️ Technologies Used
 
 - NODE.JS
+- EJS
 - EXPRESS.JS
 - JavaScript
 - MongoBD
