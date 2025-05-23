@@ -7,6 +7,30 @@
   </head>
   <body>
     <h1>Hello from Server side</h1>
-    
+    <% if (locals.id) { %>
+     <p>URL Generate: http://localhost:3001/url/<%= id %></p>
+    <% } %>
+    <div>
+      <form method="post" action="/url">
+        <label>Enter your Original url</label>
+        <input type="text" name="url" placeholder="https://exp.com" />
+        <button type="submit">Generate</button>
+      </form>
+    </div>
+    <div>
+    <% if (locals.urls) { %>
+     <table>
+      <thead>
+        <th>S. No</th>
+        <th>ShortId</th>
+        <th>RedirectID</th>
+        <th>Clicks</th>
+      </thead>
+      <tbody>
+        
+      </tbody>
+     </table>
+    <% } %>
+    </div>
   </body>
 </html>
