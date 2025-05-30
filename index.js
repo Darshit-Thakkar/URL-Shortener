@@ -23,15 +23,6 @@ app.use("/url", urlRoute);
 app.use("/user", userRoute);
 app.use("/", staticRoute);
 
-app.get("/url/:shortId", async (req, res) => {
-  const shortId = req.params.shortId;
-  const entry = await URL.findOneAndUpdate(
-    { shortId },
-    { $push: { visitHistory: { timeStamp: Date.now() } } }
-  );
-  res.redirect(entry.redirectURL);
-});
-
 app.listen(post, () =>
   console.log(`server started at http://localhost:${post}`)
 );
